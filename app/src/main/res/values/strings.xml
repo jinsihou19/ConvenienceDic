@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">迷你词典</string>
+
+    <string name="action_settings" translatable="false">设置</string>
+    <string name="aboutTitle" translatable="false">关于</string>
+    <string name="aboutMassage" translatable="false">这是一个简易小词典。词典查询支持中英互译，翻译支持英日韩法俄西到中文的翻译以及中文到英语的翻译。\n本词典数据由有道网络词典提供。\n作者：金丝猴</string>
+    <string name="aboutOK" translatable="false">确定</string>
+    <string name="errorHit" translatable="false">词典没有这个词，请重新输入。错误代码：</string>
+    <string name="warmingWord1" translatable="false">该词在本词典中没有解释。</string>
+    <string name="warmingWord2" translatable="false">该词没有网络释义</string>
+</resources>
