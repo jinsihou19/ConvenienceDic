@@ -5,3 +5,7 @@
 .DS_Store
 /build
 /app/build
+
+.idea/inspectionProfiles/profiles_settings.xml
+
+.idea/inspectionProfiles/Project_Default.xml
