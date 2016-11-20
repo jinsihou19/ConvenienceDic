@@ -1,23 +1,13 @@
 package com.example.jinsihou.ConvenienceDic;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.umeng.update.UmengUpdateAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,40 +18,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-
-public class MainActivity extends ActionBarActivity {
+public class FloatActivity extends Activity {
     private TextView mWordText = null;
     private TextView mPhonetic = null;
     private TextView mBasicText = null;
     private TextView mWebText = null;
     private TextView mTranslate = null;
-    private EditText et = null;
-    private android.support.v7.widget.CardView cardView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        UmengUpdateAgent.update(this);
-        Button btn = (Button) findViewById(R.id.btn);
-        mWordText = (TextView) findViewById(R.id.word);
-        mPhonetic = (TextView) findViewById(R.id.phonetic);
-        mBasicText = (TextView) findViewById(R.id.basic);
-        mWebText = (TextView) findViewById(R.id.web);
-        mTranslate = (TextView) findViewById(R.id.translate);
-        et = (EditText) findViewById(R.id.et);//
-        cardView = (android.support.v7.widget.CardView) findViewById(R.id.card);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchOnLine(et.getText().toString());
-            }
-        });
+        setContentView(R.layout.activity_float);
+        mWordText = (TextView) findViewById(R.id.float_word);
+        mPhonetic = (TextView) findViewById(R.id.float_phonetic);
+        mBasicText = (TextView) findViewById(R.id.float_basic);
+        mWebText = (TextView) findViewById(R.id.float_web);
+        mTranslate = (TextView) findViewById(R.id.float_translate);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             CharSequence text = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
             if (text != null) {
@@ -72,7 +48,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void searchOnLine(String keyword) {
-        cardView.setVisibility(View.GONE);
         mBasicText.setText("");
         mWordText.setText("");
         mWebText.setText("");
@@ -85,10 +60,9 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         readUrl(ConstUtils.YOUDAO_URL + urlStr);
-        et.setText("");
     }
 
-    void readUrl(String urlstr) {
+    void readUrl(String urlStr) {
         new AsyncTask<String, Void, String>() {
 
             @Override
@@ -127,12 +101,11 @@ public class MainActivity extends ActionBarActivity {
                                 mTranslate.append(trans.getString(i) + ";");
                             }
                         }
-                        cardView.setVisibility(View.VISIBLE);//显示卡片
                         InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);// 显示或者隐藏输入法
                     } else {
                         String errorName = getString(R.string.errorHit) + resultCode;
-                        Toast.makeText(MainActivity.this, errorName, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FloatActivity.this, errorName, Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -166,80 +139,6 @@ public class MainActivity extends ActionBarActivity {
                 }
                 return null;
             }
-        }.execute(urlstr);
+        }.execute(urlStr);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.menu_update) {
-            UmengUpdateAgent.forceUpdate(this);
-            return true;
-        }
-        if (id == R.id.menu_about) {
-            AlertDialog.Builder normalDia = new AlertDialog.Builder(this);
-            normalDia.setIcon(R.drawable.bookshelf);
-            normalDia.setTitle(getString(R.string.aboutTitle));
-            normalDia.setMessage(getString(R.string.aboutMassage));
-
-            normalDia.setPositiveButton(getString(R.string.aboutOK), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            normalDia.create().show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void popMenu(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater()
-                .inflate(R.menu.menu_popup, popup.getMenu());
-
-        //registering popup with OnMenuItemClickListener
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-                switch (id) {
-                    case R.id.pop_settings:
-                        return true;
-                    case R.id.pop_update:
-                        UmengUpdateAgent.forceUpdate(MainActivity.this);
-                        return true;
-                    case R.id.pop_about:
-                        AlertDialog.Builder normalDia = new AlertDialog.Builder(MainActivity.this);
-                        normalDia.setIcon(R.drawable.bookshelf);
-                        normalDia.setTitle(getString(R.string.aboutTitle));
-                        normalDia.setMessage(getString(R.string.aboutMassage));
-
-                        normalDia.setPositiveButton(getString(R.string.aboutOK), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        normalDia.create().show();
-                }
-                return true;
-            }
-        });
-        popup.show();
-    }
-
 }
