@@ -1,11 +1,9 @@
 package com.example.jinsihou.ConvenienceDic;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,8 +99,6 @@ public class FloatActivity extends Activity {
                                 mTranslate.append(trans.getString(i) + ";");
                             }
                         }
-                        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);// 显示或者隐藏输入法
                     } else {
                         String errorName = getString(R.string.errorHit) + resultCode;
                         Toast.makeText(FloatActivity.this, errorName, Toast.LENGTH_SHORT).show();

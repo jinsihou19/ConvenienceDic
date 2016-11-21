@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +42,6 @@ public class MainActivity extends ActionBarActivity {
     private TextView mBasicText = null;
     private TextView mWebText = null;
     private TextView mTranslate = null;
-    private EditText et = null;
     private android.support.v7.widget.CardView cardView = null;
 
     @Override
@@ -48,27 +49,42 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UmengUpdateAgent.update(this);
-        Button btn = (Button) findViewById(R.id.btn);
+        initViews();
+    }
+
+    private void initViews() {
         mWordText = (TextView) findViewById(R.id.word);
         mPhonetic = (TextView) findViewById(R.id.phonetic);
         mBasicText = (TextView) findViewById(R.id.basic);
         mWebText = (TextView) findViewById(R.id.web);
         mTranslate = (TextView) findViewById(R.id.translate);
-        et = (EditText) findViewById(R.id.et);//
         cardView = (android.support.v7.widget.CardView) findViewById(R.id.card);
+        final EditText mEditText = (EditText) findViewById(R.id.et);
+        Button btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchOnLine(et.getText().toString());
+                searchOnLine(mEditText.getText().toString());
+                hideIME(mEditText);
             }
         });
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            CharSequence text = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
-            if (text != null) {
-                searchOnLine(text.toString());
+        mEditText.requestFocus(); // 已经去除自动获取焦点，所以首次进去获取一下焦点
+        mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchOnLine(v.getText().toString());
+                    hideIME(v);
+                }
+                return false;
             }
-//            boolean readonly = getIntent().getBooleanExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, false);
-        }
+        });
+    }
+
+    private void hideIME(View v) {
+        v.clearFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     private void searchOnLine(String keyword) {
@@ -85,10 +101,9 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         readUrl(ConstUtils.YOUDAO_URL + urlStr);
-        et.setText("");
     }
 
-    void readUrl(String urlstr) {
+    void readUrl(String urlStr) {
         new AsyncTask<String, Void, String>() {
 
             @Override
@@ -128,8 +143,6 @@ public class MainActivity extends ActionBarActivity {
                             }
                         }
                         cardView.setVisibility(View.VISIBLE);//显示卡片
-                        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);// 显示或者隐藏输入法
                     } else {
                         String errorName = getString(R.string.errorHit) + resultCode;
                         Toast.makeText(MainActivity.this, errorName, Toast.LENGTH_SHORT).show();
@@ -166,7 +179,7 @@ public class MainActivity extends ActionBarActivity {
                 }
                 return null;
             }
-        }.execute(urlstr);
+        }.execute(urlStr);
     }
 
     @Override

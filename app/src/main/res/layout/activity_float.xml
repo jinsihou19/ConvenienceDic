@@ -23,16 +23,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textSize="16sp"
-                android:textColor="@color/background_material_dark" />
+                android:textColor="@color/background_material_dark"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/float_phonetic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <TextView
@@ -40,48 +40,48 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="基本词典"
+            android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/darker_gray" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/float_basic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="14sp"
-            android:textColor="@color/background_material_dark" />
+            android:textColor="@color/background_material_dark"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="网络释义"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/float_web"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="13sp"
-            android:textColor="@color/background_material_dark" />
+            android:textColor="@color/background_material_dark"
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="原文翻译"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/float_translate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="13sp"
-            android:textColor="@color/background_material_dark" />
+            android:textColor="@color/background_material_dark"
+            android:textSize="13sp" />
     </LinearLayout>
 </LinearLayout>
