@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="#f1f1f1">
 
     <view
         android:id="@+id/searchCard"
@@ -20,10 +21,11 @@
             android:gravity="center_vertical"
             android:padding="10dp">
 
-        <ImageView
+            <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:contentDescription="@string/info_image"
                 android:onClick="popMenu"
                 android:src="@drawable/bookshelf" />
 
@@ -35,7 +37,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_horizontal"
-                android:hint="在此输入要翻译的文本"
+                android:hint="@string/input_hint"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
@@ -50,7 +52,8 @@
                 android:layout_height="32dp"
                 android:background="@drawable/search"
                 android:gravity="center"
-                android:textSize="10dp" />
+                android:textSize="12sp"
+                tools:ignore="SmallSp" />
 
         </LinearLayout>
     </view>
@@ -104,8 +107,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="基本词典"
-                    android:textSize="20dp"
+                    android:text="@string/basic_dic"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -113,30 +116,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="网络释义"
-                    android:textSize="20dp" />
+                    android:text="@string/net_explain"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/web"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="翻译"
-                    android:textSize="20dp" />
+                    android:text="@string/translate"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/translate"
@@ -146,11 +149,53 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </view>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/historyList">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/history"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="@string/clear_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/clearHistory"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/holo_blue_dark"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:footerDividersEnabled="true"
+            android:background="@android:color/white"
+            android:headerDividersEnabled="true" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_vertical_margin"
-    tools:context="com.example.jinsihou.ConvenienceDic.FloatActivity">
+    tools:context="com.example.jinsihou.ConvenienceDic.activities.FloatActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="基本词典"
+            android:text="@string/basic_dic"
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="网络释义"
+            android:text="@string/net_explain"
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp" />
 
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="原文翻译"
+            android:text="@string/translate"
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp" />
 
