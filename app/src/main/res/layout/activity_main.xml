@@ -161,31 +161,35 @@
         android:orientation="vertical"
         android:id="@+id/historyList">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_vertical_margin"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp">
+            android:paddingRight="@dimen/activity_vertical_margin">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/history"
-                android:layout_weight="1" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:padding="5dp" />
 
             <Button
                 android:text="@string/clear_history"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/clearHistory"
-                android:background="@android:color/transparent"
+                android:background="@drawable/del_btn_bg"
                 android:textColor="@android:color/holo_blue_dark"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:includeFontPadding="false"
+                android:layout_height="30dp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <ListView
             android:id="@+id/history"
